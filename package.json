@@ -1,0 +1,27 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "qweqweq",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaksimNevzorov/IA-lesson1.git"
+  },
+  "keywords": [
+    "qweqwe"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MaksimNevzorov/IA-lesson1/issues"
+  },
+  "homepage": "https://github.com/MaksimNevzorov/IA-lesson1#readme",
+  "dependencies": {
+    "bootstrap": "^5.2.1",
+    "i": "^0.3.7",
+    "npm": "^8.19.2"
+  }
+}
