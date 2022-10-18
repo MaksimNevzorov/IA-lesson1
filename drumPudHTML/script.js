@@ -2,58 +2,67 @@ import { KEY_MAP, SOUNDS } from './constans.js'
 
 
 
-const pads = document.querySelectorAll('.pad')
+const pads = document.querySelectorAll(".pad");
+const visual = document.querySelector(".visual");
 
-const loadSounds = (sounds) => {
-    sounds.forEach((sound) => {
-        const audio = new Audio(sound)
-        audio.load()
-    });
-}
+const playSound = (sounds, ind) => {
+  let sound = sounds[ind];
+  let audio = new Audio(sound);
+  audio.load();
+  audio.play();
+};
 
-const playSound = (sounds, index) => {
-    const sound = sounds[index];
-    const audio = new Audio(sound);
-    audio.load();
-    audio.play()
-}
+const animatePad = (index) => {
+  pads[index].style.animation = `dance 0.1s ease`;
+  pads[index].addEventListener("animationend", function () {
+    pads[index].style.animation = "none";
+  });
+};
 
-loadSounds(SOUNDS)
+const createBubble = (index) => {
+  const bubble = document.createElement("div");
+  bubble.classList.add(pads[index].className.split(" ")[0]);
+  bubble.style.animation = `jump 0.5s ease`;
+  bubble.addEventListener("animationend", function () {
+    bubble.style.animation = "none";
+  });
+  visual.appendChild(bubble);
+};
 
-const animatePad = (pads, index) => {
-    const pad = pads[index];
-    pad.style.animation = 'dance 0.1s';
-    pad.addEventListener('animationend', () =>{
-        pad.style.animation = 'none';
-    })
-}
+const play = (index) => {
+  playSound(SOUNDS, index);
+  animatePad(index);
+  createBubble(index);
+};
 
-const keyPressHendler = (evt) => {
-    switch (evt.key) {
-        case KEY_MAP.kick:
-            playSound(SOUNDS, 0)
-            animatePad(pads, 0)            
-            break;
-        case KEY_MAP.cymbal:
-            playSound(SOUNDS, 1)            
-            break;
-        case KEY_MAP.snare:
-            playSound(SOUNDS, 2)            
-            break;
-        case KEY_MAP.openhat:
-            playSound(SOUNDS, 3)            
-            break;
-        case KEY_MAP.longCrash:
-            playSound(SOUNDS, 4)            
-            break;
-        case KEY_MAP.hihat:
-            playSound(SOUNDS, 5)            
-            break;
-        default:
-            break;
-    }
-}
+const keyPressHandler = ({ key }) => {
+  switch (key) {
+    case KEY_MAP.kick:
+      play(0);
+      break;
+    case KEY_MAP.cymbal:
+      play(1);
+      break;
+    case KEY_MAP.snare:
+      play(2);
+      break;
+    case KEY_MAP.openHat:
+      play(3);
+      break;
+    case KEY_MAP.longCrash:
+      play(4);
+      break;
+    case KEY_MAP.hitHat:
+      play(5);
+      break;
 
+    default:
+      console.error("Error!!! Wrong a key");
+      break;
+  }
+};
 
 
-document.addEventListener('keypress', keyPressHendler)
+
+document.addEventListener('keypress', keyPressHandler)
+
